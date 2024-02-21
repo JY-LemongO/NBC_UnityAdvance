@@ -12,7 +12,7 @@ public class CameraStateBase : IState
 
     public CameraStateBase(CameraStateMachine stateMachine)
     {
-        _stateMachine = stateMachine;        
+        _stateMachine = stateMachine;
         mTrans = stateMachine.Controller.transform;
         mStart = Quaternion.identity;
     }
@@ -24,11 +24,7 @@ public class CameraStateBase : IState
     public virtual void FixedUpdate()
     {
         if (_stateMachine.Controller.IsChanging)
-        {
-            Debug.Log("∏ÿ√·∞≈¡ˆ?");
             return;
-        }
-            
 
         Vector3 pos = Input.mousePosition;
 

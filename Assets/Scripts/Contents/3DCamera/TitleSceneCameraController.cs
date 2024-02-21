@@ -34,6 +34,7 @@ public class TitleSceneCameraController : MonoBehaviour
     private IEnumerator CoChangeCameraRoutine(Quaternion changeQuat)
     {
         IsChanging = true;
+        UI_BlockerPopup blocker = Managers.UI.ShowPopupUI<UI_BlockerPopup>();
 
         float current = 0;
         float percent = 0;
@@ -43,7 +44,7 @@ public class TitleSceneCameraController : MonoBehaviour
         while (percent < 1)
         {
             current += Time.deltaTime;
-            percent = current / 1.5f;
+            percent = current / 1f;
 
             transform.localRotation = Quaternion.Lerp(startRot, changeQuat, curve.Evaluate(percent));
 
@@ -51,5 +52,6 @@ public class TitleSceneCameraController : MonoBehaviour
         }
 
         IsChanging = false;
+        blocker.ClosePopup();
     }
 }

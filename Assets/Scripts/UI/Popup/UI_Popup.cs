@@ -8,4 +8,9 @@ public class UI_Popup : UI_Base
     {
         Managers.UI.SetCanvas(gameObject);
     }
+
+    public void ClosePopup()
+    {
+        Managers.UI.ClosePopup(this);
+    }
 }

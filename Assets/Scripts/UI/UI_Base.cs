@@ -25,15 +25,20 @@ public abstract class UI_Base : MonoBehaviour
 
         for(int i = 0; i < names.Length; i++)
         {
-            // To Do - 조건을 나눠 GameObject를 원할 때도 추가
-            objects[i] = Util.FindChild<T>(gameObject, names[i], true);
+            // Gameobject 타입
+            if (typeof(T) == typeof(GameObject))
+                objects[i] = Util.FindChild(gameObject, names[i], true);
+            else
+                objects[i] = Util.FindChild<T>(gameObject, names[i], true);
 
             if (objects[i] == null)
                 Debug.Log($"바인드에 실패했습니다. : {names[i]}");
         }
     }
 
+    protected void BindGameObject(Type type) => Bind<GameObject>(type);
     protected void BindButton(Type type) => Bind<Button>(type);
+    protected void BindText(Type type) => Bind<Text>(type);
 
     protected T Get<T>(int index) where T : UnityEngine.Object
     {
@@ -48,5 +53,7 @@ public abstract class UI_Base : MonoBehaviour
         return objects[index] as T;
     }
 
+    protected GameObject GetGameObject(int index) => Get<GameObject>(index);
     protected Button GetButton(int index) => Get<Button>(index);
+    protected Text GetText(int index) => Get<Text>(index);
 }

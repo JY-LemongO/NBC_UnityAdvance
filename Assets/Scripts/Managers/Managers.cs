@@ -7,6 +7,12 @@ public class Managers : MonoBehaviour
     static Managers s_instance;
     static Managers Instance { get { Init(); return s_instance; } }
 
+    #region Contents
+    ModuleManager _module = new ModuleManager();
+
+    public static ModuleManager Module => Instance?._module;
+    #endregion
+
     #region Core
     ResourceManager _resource = new ResourceManager();
     UIManager _uiManager = new UIManager();
@@ -35,6 +41,7 @@ public class Managers : MonoBehaviour
             s_instance = go.GetComponent<Managers>();
             DontDestroyOnLoad(go);
 
+            Module.Init();
         }
     }
 }

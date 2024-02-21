@@ -7,7 +7,7 @@ public class MainTiltState : CameraStateBase
 {
     public MainTiltState(CameraStateMachine stateMachine) : base(stateMachine)
     {
-    }
+    }    
     
     public override void Enter()
     {
