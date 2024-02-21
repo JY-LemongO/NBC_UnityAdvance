@@ -12,7 +12,7 @@ public class Managers : MonoBehaviour
     UIManager _uiManager = new UIManager();
 
     public static ResourceManager RM => Instance?._resource;
-    public static UIManager UI => Instance?._uiManager;
+    public static UIManager UI => Instance?._uiManager;    
     #endregion
 
     private void Awake()

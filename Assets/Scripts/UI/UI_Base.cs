@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class UI_Base : MonoBehaviour
 {
@@ -32,6 +33,8 @@ public abstract class UI_Base : MonoBehaviour
         }
     }
 
+    protected void BindButton(Type type) => Bind<Button>(type);
+
     protected T Get<T>(int index) where T : UnityEngine.Object
     {
         UnityEngine.Object[] objects;
@@ -44,4 +47,6 @@ public abstract class UI_Base : MonoBehaviour
 
         return objects[index] as T;
     }
+
+    protected Button GetButton(int index) => Get<Button>(index);
 }

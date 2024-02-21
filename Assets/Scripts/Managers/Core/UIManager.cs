@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIManager
-{
+{    
     private int _order = 5;
 
     private Stack<UI_Popup> _popupStack = new Stack<UI_Popup>();
@@ -21,9 +21,16 @@ public class UIManager
         }
     }
 
-    public void SetCanvas(GameObject go, bool sort = true)
+    public void SetCanvas(GameObject go, bool sort = true, bool world = false)
     {
+        if (world)
+        {
+            Set3DCanvas(go);
+            return;
+        }            
+
         Canvas canvas = go.GetComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;        
 
         if (sort)
         {
@@ -34,6 +41,13 @@ public class UIManager
         {
             canvas.sortingOrder = 0;
         }
+    }
+
+    private void Set3DCanvas(GameObject go)
+    {
+        Canvas canvas = go.GetComponent<Canvas>();
+        canvas.renderMode = RenderMode.WorldSpace;
+        canvas.worldCamera = Camera.main;
     }
 
     public T ShowSceneUI<T>(string name = null) where T : UI_Scene
