@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7820725764352045090}
   - component: {fileID: 4926907179556981096}
   - component: {fileID: 8465177237072899580}
+  - component: {fileID: 6449490380969711144}
   m_Layer: 0
   m_Name: Turret_Mesh
   m_TagString: Untagged
@@ -83,3 +84,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6449490380969711144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314738674871362329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba742e8164d3b714e83ae1a9ef116c29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

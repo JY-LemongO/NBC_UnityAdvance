@@ -9,7 +9,7 @@ public class ModuleManager
     private Dictionary<string, Parts[]> _parts = new Dictionary<string, Parts[]>();
 
     public Action<LowerBase> OnChangeLowerParts;
-    public Action<string, UpperBase> OnChangeUpperParts;
+    public Action<UpperBase> OnChangeUpperParts;
 
     public LowerBase CurrentLowerParts { get; private set; }
     public UpperBase CurrentUpperParts { get; private set; }
@@ -17,13 +17,16 @@ public class ModuleManager
     private int currentLowerIndex = 0;
     private int currentUpperIndex = 0;
 
-    // 게임 시작 시 현재 가지고있는 파츠들 딕셔너리에 담아놓기
+    // 게임 시작 시 폴더에 가지고있는 파츠들 딕셔너리에 담아놓기
     public void Init()
     {
         Parts[] lowerParts = Resources.LoadAll<LowerBase>("Prefabs/Parts/Leg");
         Parts[] upperParts = Resources.LoadAll<UpperBase>("Prefabs/Parts/Weapon");
         _parts.Add("Leg", lowerParts);
         _parts.Add("Weapon", upperParts);
+
+        CurrentLowerParts = lowerParts[0] as LowerBase;
+        CurrentUpperParts = upperParts[0] as UpperBase;
     }
 
     // 하체 변경
@@ -44,18 +47,30 @@ public class ModuleManager
             currentLowerIndex = parts.Length - 1;
 
         CurrentLowerParts = parts[currentLowerIndex] as LowerBase;
-
         OnChangeLowerParts?.Invoke(CurrentLowerParts);
+
+        ChangeUpperParts();
     }
 
     // 상체 변경
-    public void ChangeUpperParts<T>(int index = 0, string name = null) where T : IUpperParts
+    public void ChangeUpperParts(int index = 0)
     {
-        if(string.IsNullOrEmpty(name))
-        name = typeof(T).Name;
+        Parts[] parts;
+        if (_parts.TryGetValue("Weapon", out parts) == false)
+        {
+            Debug.Log("저장된 Upper 파츠가 없습니다.");
+            return;
+        }
 
-        Managers.RM.Instantiate($"Parts/Weapon/{name}");
+        int nextIndex = currentUpperIndex + index;
 
-        
+        if (nextIndex == parts.Length)
+            currentUpperIndex = 0;
+        else if (nextIndex == -1)
+            currentUpperIndex = parts.Length - 1;
+
+        CurrentUpperParts = parts[currentUpperIndex] as UpperBase;
+
+        OnChangeUpperParts?.Invoke(CurrentUpperParts);
     }
 }

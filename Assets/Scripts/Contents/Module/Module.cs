@@ -17,6 +17,7 @@ public class Module : MonoBehaviour
     private void Awake()
     {
         Managers.Module.OnChangeLowerParts += ChangeLowerParts;
+        Managers.Module.OnChangeUpperParts += ChangeUpperParts; 
     }
 
     private void FindParts()
@@ -28,5 +29,12 @@ public class Module : MonoBehaviour
     {
         Destroy(_lower);
         _lower = Managers.RM.Instantiate($"Parts/Leg/{lowerParts.name}", _lowerParent);
+        _upperParent = Util.FindChild<Transform>(_lower, "Joint_Lower", true);
+    }
+
+    private void ChangeUpperParts(UpperBase upperParts)
+    {
+        Destroy(_upper);
+        _upper = Managers.RM.Instantiate($"Parts/Weapon/{upperParts.name}", _upperParent);
     }
 }
