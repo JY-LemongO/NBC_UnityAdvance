@@ -8,8 +8,9 @@ public class ResourceManager
     {
         // To Do - Instantiate 의 Load부분을 여기서 담당.
         // 풀링 대상이면 Resources Load 하지 않고 Pool 내부의 Original 반환.
+        T type = Resources.Load<T>($"prefabs/{path}");
 
-        return null;
+        return type;
     }
 
     public GameObject Instantiate(string path, Transform parent = null)

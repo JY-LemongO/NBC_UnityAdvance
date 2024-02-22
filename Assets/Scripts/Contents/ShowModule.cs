@@ -4,14 +4,37 @@ using UnityEngine;
 
 public class ShowModule : MonoBehaviour
 {
-    [Range(0f, 20f)]
-    [SerializeField] float _rotateSpeed;
+    public GameObject _lower;
+    public GameObject _upper;
 
-    private void FixedUpdate()
+    public Transform _lowerParent;
+    public Transform _upperParent;
+
+    private void Awake()
     {
-        Vector3 rotDir = Vector3.up;
-        Vector3 rotate = rotDir * _rotateSpeed * Time.fixedDeltaTime;
+        Managers.Module.OnInitModule += InitModule;
+        Managers.Module.OnChangeLowerParts += ChangeLowerParts;
+        Managers.Module.OnChangeUpperParts += ChangeUpperParts;        
+    }
 
-        transform.Rotate(rotate);
+    private void InitModule(LowerBase lowerParts, UpperBase upperParts)
+    {
+        _lower = Instantiate(lowerParts.gameObject, _lowerParent);
+        _upperParent = Util.FindChild<Transform>(_lower, "Joint_Lower", true);
+
+        _upper = Instantiate(upperParts.gameObject, _upperParent);
+    }
+
+    private void ChangeLowerParts(LowerBase lowerParts)
+    {
+        Destroy(_lower);
+        _lower = Instantiate(lowerParts.gameObject, _lowerParent);        
+        _upperParent = Util.FindChild<Transform>(_lower, "Joint_Lower", true);
+    }
+
+    private void ChangeUpperParts(UpperBase upperParts)
+    {
+        Destroy(_upper);
+        _upper = Instantiate(upperParts.gameObject, _upperParent);        
     }
 }

@@ -5,8 +5,8 @@ using UnityEngine;
 public class Module : MonoBehaviour
 {
     // To Do - 모듈SO 받기
-    public LowerPartsSO _currentLowerPart;
-    public UpperPartsSO _currentUpperPart;
+    public LowerPartsSO _currentLowerSO;
+    public UpperPartsSO _currentUpperSO;
 
     public GameObject _lower;
     public GameObject _upper;
@@ -16,25 +16,21 @@ public class Module : MonoBehaviour
 
     private void Awake()
     {
-        Managers.Module.OnChangeLowerParts += ChangeLowerParts;
-        Managers.Module.OnChangeUpperParts += ChangeUpperParts; 
+        InitModule();
     }
 
-    private void FindParts()
+    private void InitModule()
     {
-        // To Do - 현재 파츠들 찾고 SO 할당
-    }
+        // 실제 쓸 모듈 생성 및 초기화
+        LowerBase lower = Managers.Module.CurrentLowerParts;
+        UpperBase upper = Managers.Module.CurrentUpperParts;
 
-    private void ChangeLowerParts(LowerBase lowerParts)
-    {
-        Destroy(_lower);
-        _lower = Managers.RM.Instantiate($"Parts/Leg/{lowerParts.name}", _lowerParent);
+        _lower = Instantiate(lower.gameObject, _lowerParent);
         _upperParent = Util.FindChild<Transform>(_lower, "Joint_Lower", true);
-    }
 
-    private void ChangeUpperParts(UpperBase upperParts)
-    {
-        Destroy(_upper);
-        _upper = Managers.RM.Instantiate($"Parts/Weapon/{upperParts.name}", _upperParent);
+        _upper = Instantiate(upper.gameObject, _upperParent);
+
+        _currentLowerSO = _lower.GetComponent<LowerBase>().lowerSO;
+        _currentUpperSO = _upper.GetComponent<UpperBase>().upperSO;
     }
 }

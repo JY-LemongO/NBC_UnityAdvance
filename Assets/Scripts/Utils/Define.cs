@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class Define
 {
-    public enum Parts // Temp
+    public enum LowerParts
     {
-        Upper,
-        Lower,
+        Bipedal_Mesh,
+        Catapiilar_Mesh,
+    }
+
+    public enum UpperParts
+    {
+        Turret_Mesh,
+        Canon_Test,
     }
 
     public enum WeaponType
@@ -16,5 +22,11 @@ public class Define
         Canon,
         MachineGun,
         Missile,
+    }
+
+    public enum Scenes
+    {
+        Title,
+        Main,
     }
 }

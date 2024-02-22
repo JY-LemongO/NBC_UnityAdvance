@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39dba859e73135c4d8d90136e5804418, type: 3}
-  m_Name: Lower_Catapiilar
+  m_Script: {fileID: 11500000, guid: 8b0d5c249c33ed645a1afd7f03f519c3, type: 3}
+  m_Name: Upper_RocketPod
   m_EditorClassIdentifier: 
-  typeName: Catapiilar_Mesh
-  displayName: Catapiilar
-  description: 
-  armor: 0
-  weight: 0
+  typeName: Turret_Mesh
+  displayName: Turret
+  description: "\uD130\uB81B"
+  armor: 50
+  weight: 150

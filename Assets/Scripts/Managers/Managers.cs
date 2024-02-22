@@ -15,16 +15,13 @@ public class Managers : MonoBehaviour
 
     #region Core
     ResourceManager _resource = new ResourceManager();
+    SceneManagerEx _sceneManager = new SceneManagerEx();
     UIManager _uiManager = new UIManager();
 
     public static ResourceManager RM => Instance?._resource;
+    public static SceneManagerEx Scene => Instance?._sceneManager;
     public static UIManager UI => Instance?._uiManager;    
     #endregion
-
-    private void Awake()
-    {
-        Init();
-    }
 
     private static void Init()
     {
@@ -39,9 +36,12 @@ public class Managers : MonoBehaviour
             }
 
             s_instance = go.GetComponent<Managers>();
-            DontDestroyOnLoad(go);
-
-            Module.Init();
+            DontDestroyOnLoad(go);            
         }
+    }
+
+    public static void Clear()
+    {
+
     }
 }

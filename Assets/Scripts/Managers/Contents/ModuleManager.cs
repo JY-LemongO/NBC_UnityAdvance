@@ -10,6 +10,7 @@ public class ModuleManager
 
     public Action<LowerBase> OnChangeLowerParts;
     public Action<UpperBase> OnChangeUpperParts;
+    public Action<LowerBase, UpperBase> OnInitModule;
 
     public LowerBase CurrentLowerParts { get; private set; }
     public UpperBase CurrentUpperParts { get; private set; }
@@ -17,60 +18,77 @@ public class ModuleManager
     private int currentLowerIndex = 0;
     private int currentUpperIndex = 0;
 
+    private bool _isInit = false;
+
     // 게임 시작 시 폴더에 가지고있는 파츠들 딕셔너리에 담아놓기
     public void Init()
     {
-        Parts[] lowerParts = Resources.LoadAll<LowerBase>("Prefabs/Parts/Leg");
-        Parts[] upperParts = Resources.LoadAll<UpperBase>("Prefabs/Parts/Weapon");
+        if(_isInit) return;
+        _isInit = true;
+
+        string[] lowerNames = Enum.GetNames(typeof(Define.LowerParts));
+        string[] upperNames = Enum.GetNames(typeof(Define.UpperParts));
+
+        Parts[] lowerParts = new Parts[lowerNames.Length];
+        Parts[] upperParts = new Parts[upperNames.Length];
+                
+        for(int i = 0; i < lowerNames.Length; i++)
+        {
+            lowerParts[i] = Managers.RM.Load<LowerBase>($"Parts/Leg/{lowerNames[i]}");
+
+            if (lowerParts[i] == null)
+                Debug.Log($"다리 파츠 이름이 올바르지 않습니다. : {lowerNames[i]}");
+        }
+        for (int i = 0; i < upperParts.Length; i++)
+        {
+            upperParts[i] = Managers.RM.Load<UpperBase>($"Parts/Weapon/{upperNames[i]}");
+
+            if (upperParts[i] == null)
+                Debug.Log($"무기 파츠 이름이 올바르지 않습니다. : {upperNames[i]}");
+        }
+
         _parts.Add("Leg", lowerParts);
         _parts.Add("Weapon", upperParts);
 
         CurrentLowerParts = lowerParts[0] as LowerBase;
         CurrentUpperParts = upperParts[0] as UpperBase;
+
+        OnInitModule?.Invoke(CurrentLowerParts, CurrentUpperParts);
     }
 
     // 하체 변경
     public void ChangeLowerParts(int index)
     {
-        Parts[] parts;
-        if(_parts.TryGetValue("Leg", out parts) == false) 
-        {
-            Debug.Log("저장된 Lower 파츠가 없습니다.");
-            return;
-        }
-
-        int nextIndex = currentLowerIndex + index;
-
-        if (nextIndex == parts.Length)
-            currentLowerIndex = 0;
-        else if (nextIndex == -1)
-            currentLowerIndex = parts.Length - 1;
-
-        CurrentLowerParts = parts[currentLowerIndex] as LowerBase;
+        currentLowerIndex += index;
+        CurrentLowerParts = ChangeParts<LowerBase>("Leg", ref currentLowerIndex);
+        
         OnChangeLowerParts?.Invoke(CurrentLowerParts);
-
         ChangeUpperParts();
     }
 
     // 상체 변경
     public void ChangeUpperParts(int index = 0)
-    {
-        Parts[] parts;
-        if (_parts.TryGetValue("Weapon", out parts) == false)
-        {
-            Debug.Log("저장된 Upper 파츠가 없습니다.");
-            return;
-        }
-
-        int nextIndex = currentUpperIndex + index;
-
-        if (nextIndex == parts.Length)
-            currentUpperIndex = 0;
-        else if (nextIndex == -1)
-            currentUpperIndex = parts.Length - 1;
-
-        CurrentUpperParts = parts[currentUpperIndex] as UpperBase;
+    {        
+        currentUpperIndex += index;
+        CurrentUpperParts = ChangeParts<UpperBase>("Weapon", ref currentUpperIndex);
 
         OnChangeUpperParts?.Invoke(CurrentUpperParts);
+    }
+
+    private T ChangeParts<T>(string key, ref int index) where T : Parts
+    {
+        Parts[] parts;
+        if (_parts.TryGetValue(key, out parts) == false)
+        {
+            Debug.Log("저장된 Upper 파츠가 없습니다.");
+            return null;
+        }
+
+        if (index == parts.Length)
+            index = 0;
+        else if (index == -1)
+            index = parts.Length - 1;
+
+        return parts[index] as T;
     }
 }

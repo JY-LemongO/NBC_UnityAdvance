@@ -50,17 +50,21 @@ public class UIManager
         canvas.worldCamera = Camera.main;
     }
 
-    public T Show3DSubUI<T>(Transform parent, string name = null) where T : UI_Base
+    public T Show3DWorldUI<T>(Transform parent = null, string name = null) where T : UI_Base
     {
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
 
-        GameObject go = Managers.RM.Instantiate($"UI/3D/Sub/{name}");
-        T sub = go.GetOrAddComponent<T>();        
+        GameObject go = Managers.RM.Instantiate($"UI/3D/{name}");
+        T world3D = go.GetOrAddComponent<T>();
 
+        if (parent == null)
+            parent = Root.transform;
         go.transform.SetParent(parent);
 
-        return sub;
+        Set3DCanvas(go);
+
+        return world3D;
     }
 
     public T ShowSceneUI<T>(string name = null) where T : UI_Scene
