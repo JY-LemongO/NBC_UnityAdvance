@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ILowerParts
+public interface IParts
 {
     public void Move();
     public void Look();

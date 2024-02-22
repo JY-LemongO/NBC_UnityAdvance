@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Parts : MonoBehaviour, ILowerParts
+public class Parts : MonoBehaviour, IParts
 {
     protected Module _module;
 
