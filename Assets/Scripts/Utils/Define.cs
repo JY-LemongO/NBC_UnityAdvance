@@ -6,13 +6,13 @@ public class Define
 {
     public enum LowerParts
     {
-        Bipedal_Mesh,
-        Catapiilar_Mesh,
+        Lower_Bipedal,
+        Lower_Catapiilar,
     }
 
     public enum UpperParts
     {
-        Turret_Mesh,
+        Upper_Turret,
         Canon_Test,
     }
 

@@ -19,17 +19,23 @@ public class ShowModule : MonoBehaviour
 
     private void InitModule(LowerBase lowerParts, UpperBase upperParts)
     {
-        _lower = Instantiate(lowerParts.gameObject, _lowerParent);
-        _upperParent = Util.FindChild<Transform>(_lower, "Joint_Lower", true);
+        if (_lowerParent == null)
+            _lowerParent = Util.FindChild<Transform>(gameObject, "Lower", true);
+        if (_upperParent == null)
+            _upperParent = Util.FindChild<Transform>(gameObject, "Upper", true);
 
+        _lower = Instantiate(lowerParts.gameObject, _lowerParent);
+
+        _upperParent.localPosition = Util.FindChild<Transform>(_lower.gameObject, "Joint", true).localPosition;
         _upper = Instantiate(upperParts.gameObject, _upperParent);
     }
 
     private void ChangeLowerParts(LowerBase lowerParts)
     {
         Destroy(_lower);
-        _lower = Instantiate(lowerParts.gameObject, _lowerParent);        
-        _upperParent = Util.FindChild<Transform>(_lower, "Joint_Lower", true);
+        _lower = Instantiate(lowerParts.gameObject, _lowerParent); 
+        
+        _upperParent.localPosition = Util.FindChild<Transform>(_lower.gameObject, "Joint", true).localPosition;
     }
 
     private void ChangeUpperParts(UpperBase upperParts)

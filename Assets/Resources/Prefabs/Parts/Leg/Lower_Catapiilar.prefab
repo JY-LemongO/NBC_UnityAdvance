@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 5155878412354672564}
   - component: {fileID: 8550337022083101472}
   - component: {fileID: 7162584114455302142}
+  - component: {fileID: 1723811858124307874}
   m_Layer: 0
-  m_Name: Catapiilar_Mesh
+  m_Name: Lower_Catapiilar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +98,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c3d05b2c96e0a64ca848cd81de3ec5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lowerSO: {fileID: 11400000, guid: dc43ce4c58390464dad98adf190dba59, type: 2}
+  _module: {fileID: 0}
+  _playerController: {fileID: 0}
+  <LowerSO>k__BackingField: {fileID: 11400000, guid: dc43ce4c58390464dad98adf190dba59,
+    type: 2}
+--- !u!64 &1723811858124307874
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291508603357593029}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2432090755550338912, guid: daa82fe24c16c9448b44897d423613eb, type: 3}
 --- !u!1 &7572606230893945709
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9109965092352667228}
   m_Layer: 0
-  m_Name: Joint_Lower
+  m_Name: Joint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

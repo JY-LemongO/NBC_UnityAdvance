@@ -9,7 +9,7 @@ public class ModuleManager
     private Dictionary<string, Parts[]> _parts = new Dictionary<string, Parts[]>();
 
     public Action<LowerBase> OnChangeLowerParts;
-    public Action<UpperBase> OnChangeUpperParts;
+    public Action<UpperBase> OnChangeUpperParts;    
     public Action<LowerBase, UpperBase> OnInitModule;
 
     public LowerBase CurrentLowerParts { get; private set; }
@@ -25,7 +25,7 @@ public class ModuleManager
     {
         if(_isInit) return;
         _isInit = true;
-
+        
         string[] lowerNames = Enum.GetNames(typeof(Define.LowerParts));
         string[] upperNames = Enum.GetNames(typeof(Define.UpperParts));
 
@@ -62,12 +62,11 @@ public class ModuleManager
         currentLowerIndex += index;
         CurrentLowerParts = ChangeParts<LowerBase>("Leg", ref currentLowerIndex);
         
-        OnChangeLowerParts?.Invoke(CurrentLowerParts);
-        ChangeUpperParts();
+        OnChangeLowerParts?.Invoke(CurrentLowerParts);        
     }
 
     // 상체 변경
-    public void ChangeUpperParts(int index = 0)
+    public void ChangeUpperParts(int index)
     {        
         currentUpperIndex += index;
         CurrentUpperParts = ChangeParts<UpperBase>("Weapon", ref currentUpperIndex);
@@ -88,7 +87,7 @@ public class ModuleManager
             index = 0;
         else if (index == -1)
             index = parts.Length - 1;
-
+        
         return parts[index] as T;
     }
 }

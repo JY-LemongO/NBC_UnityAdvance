@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7751811281240372918}
   m_Layer: 0
-  m_Name: Joint_Lower
+  m_Name: Joint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,8 +43,9 @@ GameObject:
   - component: {fileID: 8352682102697929075}
   - component: {fileID: 2920952203882734526}
   - component: {fileID: 8014240442689300479}
+  - component: {fileID: 5956660406791212127}
   m_Layer: 0
-  m_Name: Bipedal_Mesh
+  m_Name: Lower_Bipedal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,4 +129,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0991c17d2d5816d4fab485ac98816498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lowerSO: {fileID: 11400000, guid: e357bbba190b4c6429e12027428b190d, type: 2}
+  _module: {fileID: 0}
+  _playerController: {fileID: 0}
+  <LowerSO>k__BackingField: {fileID: 11400000, guid: e357bbba190b4c6429e12027428b190d,
+    type: 2}
+--- !u!64 &5956660406791212127
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5847248454757672760}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2432090755550338912, guid: 1054387e2ac64f04bb7772f9129dd1fb, type: 3}

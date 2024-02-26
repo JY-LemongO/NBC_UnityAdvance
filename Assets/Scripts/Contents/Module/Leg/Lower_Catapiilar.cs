@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Catapiilar_Mesh : LowerBase
+public class Lower_Catapiilar : LowerBase
 {
    
 }

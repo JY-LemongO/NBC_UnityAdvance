@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39dba859e73135c4d8d90136e5804418, type: 3}
   m_Name: Lower_Bipedal
   m_EditorClassIdentifier: 
-  typeName: Bipedal_Mesh
-  displayName: Bipedal
-  description: "\uC774\uC871\uBCF4\uD589\uD615 \uB2E4\uB9AC"
-  armor: 150
-  weight: 500
+  <TypeName>k__BackingField: Lower_Bipedal
+  <DisplayName>k__BackingField: Bipedal
+  <Description>k__BackingField: "\uC774\uC871\uBCF4\uD589\uD615 \uB2E4\uB9AC"
+  <Armor>k__BackingField: 250
+  <Weight>k__BackingField: 500
+  <Power>k__BackingField: 500

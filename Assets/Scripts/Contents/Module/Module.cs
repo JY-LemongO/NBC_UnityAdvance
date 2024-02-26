@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Module : MonoBehaviour
 {
-    // To Do - 모듈SO 받기
-    public LowerPartsSO _currentLowerSO;
-    public UpperPartsSO _currentUpperSO;
+    [field: SerializeField] public LowerPartsSO CurrentLowerSO { get; private set; }
+    [field: SerializeField] public UpperPartsSO CurrentUpperSO { get; private set; }
 
-    public GameObject _lower;
-    public GameObject _upper;
+    [field: SerializeField] public LowerBase Lower { get; private set; }
+    [field: SerializeField] public UpperBase Upper { get; private set; }
 
-    public Transform _lowerParent;
-    public Transform _upperParent;
+    [field: SerializeField] public Transform LowerParent { get; private set; }
+    [field: SerializeField] public Transform UpperParent { get; private set; }
+    [field: SerializeField] public Transform CamFollower { get; private set; }
+
+    public PlayerController Controller { get; private set; }
+
+    public int TotalArmor { get; private set; }
 
     private void Awake()
     {
@@ -21,16 +25,30 @@ public class Module : MonoBehaviour
 
     private void InitModule()
     {
-        // 실제 쓸 모듈 생성 및 초기화
+        if (LowerParent == null)
+            LowerParent = Util.FindChild<Transform>(gameObject, "Lower", true);
+        if (UpperParent == null)
+            UpperParent = Util.FindChild<Transform>(gameObject, "Upper", true);
+        if (CamFollower == null)
+            CamFollower = Util.FindChild<Transform>(gameObject, "CamFollower", true);
+
         LowerBase lower = Managers.Module.CurrentLowerParts;
         UpperBase upper = Managers.Module.CurrentUpperParts;
 
-        _lower = Instantiate(lower.gameObject, _lowerParent);
-        _upperParent = Util.FindChild<Transform>(_lower, "Joint_Lower", true);
+        Lower = Instantiate(lower.gameObject, LowerParent).GetComponent<LowerBase>();
+        UpperParent.position = Util.FindChild<Transform>(Lower.gameObject, "Joint", true).transform.localPosition;
+        CamFollower.position = Util.FindChild<Transform>(gameObject, "CamFollower", true).transform.localPosition + Vector3.up * 3;
+        Upper = Instantiate(upper.gameObject, UpperParent).GetComponent<UpperBase>();
 
-        _upper = Instantiate(upper.gameObject, _upperParent);
+        CurrentLowerSO = Lower.LowerSO;
+        CurrentUpperSO = Upper.UpperSO;
 
-        _currentLowerSO = _lower.GetComponent<LowerBase>().lowerSO;
-        _currentUpperSO = _upper.GetComponent<UpperBase>().upperSO;
+        TotalArmor = CurrentLowerSO.Armor + CurrentUpperSO.Armor;
+
+        Controller = GetComponent<PlayerController>();
+        Controller.Init(this);
+
+        Lower.Init(this);
+        Upper.Init(this);
     }
 }

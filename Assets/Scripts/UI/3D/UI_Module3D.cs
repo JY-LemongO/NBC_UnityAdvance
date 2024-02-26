@@ -60,8 +60,8 @@ public class UI_Module3D : UI_3D
     private void OpenLowerSelector()
     {
         _selector.SetActive(true);
-        GetText((int)Texts.PartsName_Text).text = _lower.lowerSO.displayName;
-        GetText((int)Texts.Desc_Text).text = _lower.lowerSO.description;
+        GetText((int)Texts.PartsName_Text).text = _lower.LowerSO.DisplayName;
+        GetText((int)Texts.Desc_Text).text = _lower.LowerSO.Description;
 
         ClearEvent();
         GetButton((int)Buttons.Previous_Btn).onClick.AddListener(() => Managers.Module.ChangeLowerParts(-1));
@@ -71,8 +71,8 @@ public class UI_Module3D : UI_3D
     private void OpenUpperSelector()
     {
         _selector.SetActive(true);
-        GetText((int)Texts.PartsName_Text).text = _upper.upperSO.displayName;
-        GetText((int)Texts.Desc_Text).text = _upper.upperSO.description;
+        GetText((int)Texts.PartsName_Text).text = _upper.UpperSO.DisplayName;
+        GetText((int)Texts.Desc_Text).text = _upper.UpperSO.Description;
 
         ClearEvent();
         GetButton((int)Buttons.Previous_Btn).onClick.AddListener(() => Managers.Module.ChangeUpperParts(-1));
@@ -89,7 +89,7 @@ public class UI_Module3D : UI_3D
     {
         _lower = lowerBase;
 
-        UpdateTexts(_lower.lowerSO);
+        UpdateTexts(_lower.LowerSO);
     }
 
     private void UpdateUpperTexts(UpperBase upperBase)
@@ -99,19 +99,19 @@ public class UI_Module3D : UI_3D
 
         _upper = upperBase;
 
-        UpdateTexts(_upper.upperSO);
+        UpdateTexts(_upper.UpperSO);
     }
 
     private void UpdateTexts(ModuleSO so = null)
     {
         if (so != null)
         {
-            GetText((int)Texts.PartsName_Text).text = so.displayName;
-            GetText((int)Texts.Desc_Text).text = so.description;
+            GetText((int)Texts.PartsName_Text).text = so.DisplayName;
+            GetText((int)Texts.Desc_Text).text = so.Description;
         }        
         GetText((int)Texts.Status_Text).text = $"" +
-            $"WEIGHT : {_lower.lowerSO.weight + _upper.upperSO.weight}\n" +
-            $"ARMOR : {_lower.lowerSO.armor + _upper.upperSO.armor}";
+            $"WEIGHT : {_lower.LowerSO.Weight + _upper.UpperSO.Weight}\n" +
+            $"ARMOR : {_lower.LowerSO.Armor + _upper.UpperSO.Armor}";
     }
 
     private void InitText(LowerBase lowerBase, UpperBase upperBase)

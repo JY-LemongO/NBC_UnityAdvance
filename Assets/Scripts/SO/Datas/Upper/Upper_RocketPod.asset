@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b0d5c249c33ed645a1afd7f03f519c3, type: 3}
   m_Name: Upper_RocketPod
   m_EditorClassIdentifier: 
-  typeName: Turret_Mesh
-  displayName: Turret
-  description: "\uD130\uB81B"
-  armor: 50
-  weight: 150
+  <TypeName>k__BackingField: Upper_Turret
+  <DisplayName>k__BackingField: Turret
+  <Description>k__BackingField: "\uD130\uB81B"
+  <Armor>k__BackingField: 100
+  <Weight>k__BackingField: 150

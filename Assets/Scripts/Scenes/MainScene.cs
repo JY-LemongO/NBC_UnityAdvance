@@ -8,7 +8,7 @@ public class MainScene : BaseScene
     {
         base.Init();
 
-        Managers.RM.Instantiate($"Module/Module");
+        //Managers.RM.Instantiate($"Module/Module");
     }
 
     public override void Clear()
